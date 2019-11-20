@@ -48,9 +48,33 @@
 //
 // returns ['Beth Jr. Johnson', 'Joshie Wyattson'];
 
+ function each(coll, func) { 
+       if (Array.isArray(coll)) { 
+             for (var i = 0; i < coll.length; i++) { 
+                   func(coll[i], i); 
+             } 
+       } else { 
+             for (var key in coll) { 
+                   func(coll[key], key); 
+             } 
+       } 
+ }
+var resultArr = [] ;
+var filterFamilyMembers = function (familyTree, truthTest) { 
+ 	if(truthTest(familyTree)){
+  		resultArr.push(familyTree['firstName'] + familyTree['lastName'])
+  	}
 
+  	if(familyTree.children && (familyTree.children).length !== 0){
+  		each(familyTree.children, function(child){
+  			
+  			return filterFamilyMembers(child, truthTest)
+  		})
+  		
+  	}
+  	return resultArr
+  }
 
-var filterFamilyMembers = function (familyTree, truthTest) {
-  // All your code in this function body
-};
+  
+
 
